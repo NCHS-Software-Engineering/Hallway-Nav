@@ -4,6 +4,7 @@
     "express": "^4.21.2",
     "http": "^0.0.1-security",
     "node": "^18.20.6",
+    "path": "^0.12.7",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-scripts": "^5.0.1",

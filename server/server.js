@@ -14,8 +14,9 @@ app.use((req, res, next) => {
     next();
 });
 app.use(express.json());
+
 app.use(express.static(path.join(__dirname, "../client/build")));
-app.get()
+
 server.listen(port, () => {
     console.log(`The server is listening on port ${port}`);
 });
