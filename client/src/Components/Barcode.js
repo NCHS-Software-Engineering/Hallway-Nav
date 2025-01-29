@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 const Barcode = () => {
-    const [num, setNum] = useState("<scan now>");
+    const [num, setNum] = useState(0);
 
     useEffect(() => {
         const fetchCode = async() => {
@@ -12,14 +12,16 @@ const Barcode = () => {
                 console.log("Device error.");
             }
 
-            setNum(res.num);
+            const json = await res.json();
+            setNum(json.barcode);
         };
-        setInterval(fetchCode, 500);
+        
+        fetchCode();
     }, [num]);
 
     return (
         <>
-            Barcode: {num}
+            Barcode: {num===0 ? "Scan now." : num}
         </>
     );
 };

@@ -20,3 +20,21 @@ app.use(express.static(path.join(__dirname, "../client/build")));
 server.listen(port, () => {
     console.log(`The server is listening on port ${port}`);
 });
+
+const readline = require('readline');
+
+// Create a readline interface
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+app.get("/barcode", (req, res) => {
+    console.log('Barcode scanner ready. Scan a barcode...');
+
+    // Listen for input
+    rl.on('line', (input) => {
+        console.log(`Scanned barcode: ${input}`);
+        res.json({barcode: input});
+    });
+});
