@@ -1,5 +1,24 @@
 import './App.css';
 import Barcode from './Components/Barcode';
+import React from 'react';
+import {Button} from 'react-bootstrap';
+
+
+const Basement = () => {
+  document.querySelector("figure").innerHTML = "<img src = \"./img/basement.png\"/>";
+}
+
+const Floor1 = () => {
+  document.querySelector("figure").innerHTML = "<img src = \"./img/firstFloor.png\"/>";
+}
+
+const Floor2 = () => {
+  document.querySelector("figure").innerHTML = "<img src = \"./img/secondFloor.png\"/>";
+}
+
+const Floor3 = () => {
+  document.querySelector("figure").innerHTML = "<img src = \"./img/thirdFloor.png\"/>";
+}
 
 function App() {
   return (
@@ -7,13 +26,14 @@ function App() {
       <Barcode/>
       <header className="App-header">
         <ul>
-            <li><a href = "basement.html">Basement</a></li>
-            <li><a href = "baseFloor.html">Base Floor</a></li>
-            
-            <li><a href = "bSecondFloor.html">Second Floor</a></li>
-            <li><a href = "bThirdFloor.html">Third Floor</a></li>
+            <li><Button onClick={Basement}>Basement</Button></li>
+            <li><Button onClick={Floor1}>First Floor</Button></li>
+            <li><Button onClick={Floor2}>Second Floor</Button></li>
+            <li><Button onClick={Floor3}>Third Floor</Button></li>
         </ul>
       </header>
+      <figure>
+      </figure>
     </div>
   );
 }
