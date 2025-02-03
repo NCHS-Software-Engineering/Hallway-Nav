@@ -31,3 +31,19 @@
     transform: rotate(360deg);
   }
 }
+
+figure.basement::after {
+  content: url(./img/basement.png);
+}
+
+figure.first::after {
+  content: url(./img/firstFloor.png);
+}
+
+figure.second::after {
+  content: url(./img/secondFloor.png);
+}
+
+figure.third::after {
+  content: url(./img/thirdFloor.png);
+}

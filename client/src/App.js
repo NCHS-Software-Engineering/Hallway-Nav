@@ -5,19 +5,19 @@ import {Button} from 'react-bootstrap';
 
 
 const Basement = () => {
-  document.querySelector("figure").innerHTML = "<img src = \"./img/basement.png\"/>";
+  document.querySelector("figure").className = "basement";
 }
 
 const Floor1 = () => {
-  document.querySelector("figure").innerHTML = "<img src = \"./img/firstFloor.png\"/>";
+  document.querySelector("figure").className = "first";
 }
 
 const Floor2 = () => {
-  document.querySelector("figure").innerHTML = "<img src = \"./img/secondFloor.png\"/>";
+  document.querySelector("figure").className = "second";
 }
 
 const Floor3 = () => {
-  document.querySelector("figure").innerHTML = "<img src = \"./img/thirdFloor.png\"/>";
+  document.querySelector("figure").className = "third";
 }
 
 function App() {
