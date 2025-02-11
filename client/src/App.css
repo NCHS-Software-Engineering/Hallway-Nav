@@ -32,22 +32,21 @@
   }
 }
 
-figure.basement::after {
-  content: url(./img/basement.png);
-}
-
-figure.first::after {
-  content: url(./img/firstFloor.png);
-}
-
-figure.second::after {
-  content: url(./img/secondFloor.png);
-}
-
-figure.third::after {
-  content: url(./img/thirdFloor.png);
-}
-
 ul {
   list-style-type: none;
+}
+
+img {
+  max-width: 50%;
+  max-height: auto;
+  transform: scale(1.4); /* Shrinks the image to 50% */
+  position: relative;
+  top: 200px;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }
