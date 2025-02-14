@@ -22,13 +22,16 @@ const Floor3 = () => {
 
 function App() {
   return (
+    
     <div className="App">
+       
       <Barcode/>
       <ul>
           <li><Button onClick={Basement}>Basement</Button></li>
           <li><Button onClick={Floor1}>First Floor</Button></li>
           <li><Button onClick={Floor2}>Second Floor</Button></li>
           <li><Button onClick={Floor3}>Third Floor</Button></li>
+          
       </ul>
       <figure>
       </figure>
