@@ -11,6 +11,9 @@ function App() {
     <div className="App">
       <Barcode />
 
+      <AwesomeButton type="primary">Primary</AwesomeButton>
+
+      
       <ul>
         <li>
           <AwesomeButton type="primary" onPress={() => setImageSrc(require('./img/basement.png'))}>
