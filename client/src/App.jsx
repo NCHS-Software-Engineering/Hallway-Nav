@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import Barcode from './Components/Barcode';
-import { Button } from 'react-bootstrap';
+import { AwesomeButton } from 'react-awesome-button';
 import 'react-awesome-button/dist/themes/theme-blue.css';
 
 function App() {
@@ -12,10 +12,26 @@ function App() {
       <Barcode />
 
       <ul>
-        <li><Button onClick={() => setImageSrc(require('./img/basement.png'))}>Basement</Button></li>
-        <li><Button onClick={() => setImageSrc(require('./img/firstFloor.png'))}>First Floor</Button></li>
-        <li><Button onClick={() => setImageSrc(require('./img/secondFloor.png'))}>Second Floor</Button></li>
-        <li><Button onClick={() => setImageSrc(require('./img/thirdFloor.png'))}>Third Floor</Button></li>
+        <li>
+          <AwesomeButton type="primary" onPress={() => setImageSrc(require('./img/basement.png'))}>
+            Basement
+          </AwesomeButton>
+        </li>
+        <li>
+          <AwesomeButton type="secondary" onPress={() => setImageSrc(require('./img/firstFloor.png'))}>
+            First Floor
+          </AwesomeButton>
+        </li>
+        <li>
+          <AwesomeButton type="primary" onPress={() => setImageSrc(require('./img/secondFloor.png'))}>
+            Second Floor
+          </AwesomeButton>
+        </li>
+        <li>
+          <AwesomeButton type="secondary" onPress={() => setImageSrc(require('./img/thirdFloor.png'))}>
+            Third Floor
+          </AwesomeButton>
+        </li>
       </ul>
 
       <figure>
