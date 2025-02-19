@@ -2,6 +2,11 @@ import './App.css';
 import Barcode from './Components/Barcode';
 import React from 'react';
 import {Button} from 'react-bootstrap';
+import 'react-awesome-button/dist/themes/theme-blue.css';
+import AwesomeButton from 'react-awesome-button/src/components/AwesomeButton';
+import AwesomeButtonProgress from 'react-awesome-button/src/components/AwesomeButtonProgress';
+import AwesomeButtonSocial from 'react-awesome-button/src/components/AwesomeButtonSocial';
+
 
 
 const Basement = () => {
