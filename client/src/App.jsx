@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import Barcode from './Components/Barcode';
-import { AwesomeButton } from 'react-awesome-button';
+import AwesomeButton from 'react-awesome-button/src/components/AwesomeButton';
 import 'react-awesome-button/dist/themes/theme-blue.css';
 
 function App() {
