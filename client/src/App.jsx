@@ -14,28 +14,13 @@ function App() {
 
       <AwesomeButton type="primary">Primary</AwesomeButton>
 
-      
+
       <ul>
-        <li>
-          <AwesomeButton type="primary" onPress={() => setImageSrc(require('./img/basement.png'))}>
-            Basement
-          </AwesomeButton>
-        </li>
-        <li>
-          <AwesomeButton type="secondary" onPress={() => setImageSrc(require('./img/firstFloor.png'))}>
-            First Floor
-          </AwesomeButton>
-        </li>
-        <li>
-          <AwesomeButton type="primary" onPress={() => setImageSrc(require('./img/secondFloor.png'))}>
-            Second Floor
-          </AwesomeButton>
-        </li>
-        <li>
-          <AwesomeButton type="secondary" onPress={() => setImageSrc(require('./img/thirdFloor.png'))}>
-            Third Floor
-          </AwesomeButton>
-        </li>
+          <li><AwesomeButton onClick={Basement}>Basement</AwesomeButton></li>
+          <li><AwesomeButton onClick={Floor1}>First Floor</AwesomeButton></li>
+          <li><AwesomeButton onClick={Floor2}>Second Floor</AwesomeButton></li>
+          <li><AwesomeButton onClick={Floor3}>Third Floor</AwesomeButton></li>
+          
       </ul>
 
       <figure>
