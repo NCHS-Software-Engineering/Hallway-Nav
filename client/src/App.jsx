@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
 import Barcode from './Components/Barcode';
-import { AwesomeButton } from 'react-awesome-button/src/components/AwesomeButton';
-
-import 'react-awesome-button/dist/themes/theme-blue.css';
 
 function App() {
   const [imageSrc, setImageSrc] = useState(null);
@@ -12,15 +9,11 @@ function App() {
     <div className="App">
       <Barcode />
 
-      <AwesomeButton type="primary">Primary</AwesomeButton>
-
-
       <ul>
-          <li><AwesomeButton onClick={Basement}>Basement</AwesomeButton></li>
-          <li><AwesomeButton onClick={Floor1}>First Floor</AwesomeButton></li>
-          <li><AwesomeButton onClick={Floor2}>Second Floor</AwesomeButton></li>
-          <li><AwesomeButton onClick={Floor3}>Third Floor</AwesomeButton></li>
-          
+          <li><button onClick={() => setImageSrc(require('./img/basement.png'))}>Basement</button></li>
+          <li><button onClick={() => setImageSrc(require('./img/firstFloor.png'))}>First Floor</button></li>
+          <li><button onClick={() => setImageSrc(require('./img/secondFloor.png'))}>Second Floor</button></li>
+          <li><button onClick={() => setImageSrc(require('./img/thirdFloor.png'))}>Third Floor</button></li>
       </ul>
 
       <figure>
