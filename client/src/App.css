@@ -51,5 +51,19 @@ img {
   width: 50%;
 }
 
+button {
+  font-size: 18px;
+  padding: 2px 10px;
+  margin: 5px;
+  border-radius: 3px;
+}
 
+ul :nth-child(even) button {
+  border-color: #949615;
+  background-color: #f5e610;
+}
 
+ul :nth-child(odd) button {
+  border-color: #839615;
+  background-color: #cbf510;
+}
