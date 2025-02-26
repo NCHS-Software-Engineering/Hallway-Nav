@@ -67,3 +67,7 @@ ul :nth-child(odd) button {
   border-color: #839615;
   background-color: #cbf510;
 }
+
+img + select {
+  bottom: -200px;
+}
