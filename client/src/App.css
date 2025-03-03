@@ -32,6 +32,19 @@
   }
 }
 
+.scan {
+  width: 15%;
+  border-radius: 3px;
+  font-size: 20px;
+  margin: 5px;
+  background-color: rgb(111, 231, 131);
+}
+
+.scroll {
+  list-style-type: none;
+}
+
+
 ul {
   list-style-type: none;
 }

@@ -21,7 +21,7 @@ const Barcode = () => {
 
     return (
         <>
-            Barcode: {num===0 ? "Scan now." : num}
+            Barcode: {num===0 ? "Scan now" : num}
         </>
     );
 };
