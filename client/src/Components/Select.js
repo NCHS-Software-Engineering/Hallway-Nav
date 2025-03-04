@@ -48,7 +48,6 @@ const Select = () => {
         rooms.sort((i) => {
             if(i[0] === "B")
                 return -1;
-            i.replaceAll()
         });
 
         let roomSelection = [];
