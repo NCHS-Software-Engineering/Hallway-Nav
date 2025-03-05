@@ -15,7 +15,7 @@ function App() {
     </div>
       <ul>
 
-        <li><button onClick={() => setMapComponentb(require('./src/MapComponent1.js'))}>Basement</button></li>
+        <li><button onClick={() => setMapComponentb(require('./MapComponent1.js'))}>Basement</button></li>
         <li><button onClick={() => setImageSrc(require('./img/firstFloor.png'))}>First Floor</button></li>
         <li><button onClick={() => setImageSrc(require('./img/secondFloor.png'))}>Second Floor</button></li>
         <li><button onClick={() => setImageSrc(require('./img/thirdFloor.png'))}>Third Floor</button></li>
