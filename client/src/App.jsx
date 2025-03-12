@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import './App.css';
+import IconButton from '@mui/material/IconButton';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Barcode from './Components/Barcode';
 import Select from "./Components/Select";
 import MapComponentb from "./MapComponentb"; // Import the component
@@ -27,12 +30,16 @@ function App() {
 
 
       <figure>
-        {floor === 0 ? <MapComponentb/> :
-        (floor === 1 ? <MapComponentf1/> :
-         (floor === 2 ? <MapComponentf2/> : 
-          (floor === 3 ? <MapComponentf3/> : null)
-         )
-        )}
+        {floor !== -1 && [<MapComponentb/>, <MapComponentf1/>, <MapComponentf2/>, <MapComponentf3/>][floor]}
+        {floor !== -1 &&
+        <div className="scroll">
+          <li>
+            <IconButton aria-label="up" size="medium" onClick={setFloor(floor === 3? 0: floor + 1)}><KeyboardArrowUpIcon /></IconButton>
+          </li>
+          <li>
+            <IconButton aria-label="down" size="medium" onClick={setFloor(floor === 0? 3: floor - 1)}><KeyboardArrowDownIcon /></IconButton>
+          </li>
+        </div>}
       </figure>
 
     </div>
