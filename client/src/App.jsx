@@ -9,6 +9,7 @@ import MapComponentf3 from "./MapComponentf3.js"; // Import the component
 function App() {
   const [imageSrc, setImageSrc] = useState(null);
   const [path, setPath] = useState([]);
+  const [floor, setFloor] = useState(-1);
   const [MapComponent, setMapComponent] = useState(null);
   return (
     <div className="App">
@@ -16,15 +17,20 @@ function App() {
       <div className="bg-red-600 min-h-screen flex items-center justify-center">
     </div>
       <ul>
-        <li><button onClick={() => setMapComponent(require('./MapComponentb.js'))}>Basement</button></li>
-        <li><button onClick={() => setMapComponent(require('./MapComponentf1.js'))}>First Floor</button></li>
-        <li><button onClick={() => setMapComponent(require('./MapComponentf2.js'))}>Second Floor</button></li>
-        <li><button onClick={() => setMapComponent(require('./MapComponentf3.js'))}>Third Floor</button></li>
+        <li><button onClick={() => {setMapComponent(require('./MapComponentb.js')); setFloor(0)}}>Basement</button></li>
+        <li><button onClick={() => {setMapComponent(require('./MapComponentf1.js')); setFloor(1)}}>First Floor</button></li>
+        <li><button onClick={() => {setMapComponent(require('./MapComponentf2.js')); setFloor(2)}}>Second Floor</button></li>
+        <li><button onClick={() => {setMapComponent(require('./MapComponentf3.js')); setFloor(3)}}>Third Floor</button></li>
       </ul>
 
 
       <figure>
-        {<MapComponentb/>} Intending to replace this with the proper SVG every time
+        {floor === 0 ? <MapComponentb/> :
+        (floor === 1 ? <MapComponentf1/> :
+         (floor === 2 ? <MapComponentf2/> : 
+          (floor === 3 ? <MapComponentf3/> : null)
+         )
+        )}
       </figure>
 
     </div>
