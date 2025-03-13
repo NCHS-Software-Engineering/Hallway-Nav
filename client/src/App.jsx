@@ -26,22 +26,21 @@ function App() {
         <li><button onClick={() => {setMapComponent(require('./MapComponentf1.js')); setFloor(1)}}>1st floor</button></li>
         <li><button onClick={() => {setMapComponent(require('./MapComponentf2.js')); setFloor(2)}}>2nd floor</button></li>
         <li><button onClick={() => {setMapComponent(require('./MapComponentf3.js')); setFloor(3)}}>3rd floor</button></li>
+        {floor !== -1 &&
+        <div className="scroll">
+          <li>
+            <IconButton aria-label="up" size="medium" onClick={() => setFloor(floor === 3? 0: floor + 1)}><KeyboardArrowUpIcon /></IconButton>
+          </li>
+          <li>
+            <IconButton aria-label="down" size="medium" onClick={() => setFloor(floor === 0? 3: floor - 1)}><KeyboardArrowDownIcon /></IconButton>
+          </li>
+        </div>}
       </ul>
 
 
       <figure>
         {floor !== -1 && [<MapComponentb/>, <MapComponentf1/>, <MapComponentf2/>, <MapComponentf3/>][floor]}
-        {floor !== -1 &&
-        <div className="scroll">
-          <li>
-            <IconButton aria-label="up" size="medium" onClick={setFloor(floor === 3? 0: floor + 1)}><KeyboardArrowUpIcon /></IconButton>
-          </li>
-          <li>
-            <IconButton aria-label="down" size="medium" onClick={setFloor(floor === 0? 3: floor - 1)}><KeyboardArrowDownIcon /></IconButton>
-          </li>
-        </div>}
       </figure>
-
     </div>
   );
 }
