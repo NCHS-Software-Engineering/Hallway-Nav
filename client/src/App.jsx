@@ -10,11 +10,16 @@ import MapComponentf1 from "./MapComponentf1"; // Import the component
 import MapComponentf2 from "./MapComponentf2"; // Import the component
 import MapComponentf3 from "./MapComponentf3"; // Import the component
 
+import logo from "./img/NCHSlogo.png";
+
 function App() {
   const [floor, setFloor] = useState(-1);
   const [MapComponent, setMapComponent] = useState(null);
   return (
     <div className="App">
+      <header style={{backgroundColor: 'red'}}>
+          <p>Naperville Central class finder - by Pathfinders</p>
+      </header>
       <Barcode />
       <div className="bg-red-600 min-h-screen flex items-center justify-center">
     </div>
