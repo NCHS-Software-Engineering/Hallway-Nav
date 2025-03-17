@@ -10,14 +10,12 @@ import MapComponentf1 from "./MapComponentf1"; // Import the component
 import MapComponentf2 from "./MapComponentf2"; // Import the component
 import MapComponentf3 from "./MapComponentf3"; // Import the component
 
-import logo from "./img/NCHSlogo.png";
-
 function App() {
   const [floor, setFloor] = useState(-1);
   const [MapComponent, setMapComponent] = useState(null);
   return (
     <div className="App">
-      <header style={{backgroundColor: 'red'}}>
+      <header>
           <p>Naperville Central class finder - by Pathfinders</p>
       </header>
       <Barcode />
@@ -46,6 +44,9 @@ function App() {
       <figure>
         {floor !== -1 && [<MapComponentb/>, <MapComponentf1/>, <MapComponentf2/>, <MapComponentf3/>][floor]}
       </figure>
+      <footer>
+        <p>Software Engineering 2, 2025</p>
+      </footer>
     </div>
   );
 }

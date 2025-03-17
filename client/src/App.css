@@ -38,12 +38,21 @@ body {
 
 header p::before {
   content: url("./img/NCHSlogo.png");
+  margin-right: 50px;
 }
 
-header p {
+header p, footer p {
   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   font-size: 35px;
   color: lightgray;
+  margin: 0 auto;
+}
+
+header, footer {
+  margin-bottom: 30px;
+  background-color: red;
+  border-top: 4px solid lightgray;
+  border-bottom: 4px solid lightgray;
 }
 
 ul {
@@ -56,6 +65,11 @@ img {
   transform: scale(1.4); /* Shrinks the image to 50% */
   position: relative;
   top: 200px;
+}
+
+img.w-full.h-auto {
+  transform: translate(100px, 0) scale(1.5);
+  border: 2px ridge red;
 }
 
 .center {
