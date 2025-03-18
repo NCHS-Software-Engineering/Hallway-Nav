@@ -1,33 +1,52 @@
 import React, { useState } from 'react';
 import './App.css';
-import Barcode from './Components/Barcode';
 import IconButton from '@mui/material/IconButton';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import Barcode from './Components/Barcode';
+import Select from "./Components/Select";
+import MapComponentb from "./MapComponentb"; // Import the component
+import MapComponentf1 from "./MapComponentf1"; // Import the component
+import MapComponentf2 from "./MapComponentf2"; // Import the component
+import MapComponentf3 from "./MapComponentf3"; // Import the component
 
 function App() {
-  const [imageSrc, setImageSrc] = useState(null);
-  const images = [require('./img/basement.png'), require('./img/firstFloor.png'), require('./img/secondFloor.png'), require('./img/thirdFloor.png')]
-  const [index, setIndex] = useState(null);
+  const [floor, setFloor] = useState(-1);
+  const [MapComponent, setMapComponent] = useState(null);
   return (
     <div className="App">
-      <div className="scan"><Barcode /></div>
-
-      <div className="scroll">
-        <li><IconButton aria-label="up" size="medium" onClick={function(event){ if(index===3)setImageSrc(images[0]); else setImageSrc(images[index+1]); if(index===3) setIndex(0); else setIndex(index+1)}}><KeyboardArrowUpIcon /></IconButton></li>
-        <li><IconButton aria-label="down" size="medium" onClick={function(event){ if(index===0) setImageSrc(images[3]); else setImageSrc(images[index-1]); if(index===0) setIndex(3); else setIndex(index-1)}}><KeyboardArrowDownIcon /></IconButton></li>
-      </div>
-
+      <header>
+          <p>Naperville Central class finder - by Pathfinders</p>
+      </header>
+      <Barcode />
+      <div className="bg-red-600 min-h-screen flex items-center justify-center">
+    </div>
       <ul>
-          <li><button  onClick={function(event){ setImageSrc(images[0]); setIndex(0)}}>Basement</button></li>
-          <li><button onClick={function(event){ setImageSrc(images[1]); setIndex(1)}}>First Floor</button></li>
-          <li><button onClick={function(event){ setImageSrc(images[2]); setIndex(2)}}>Second Floor</button></li>
-          <li><button onClick={function(event){ setImageSrc(images[3]); setIndex(3)}}>Third Floor</button></li>
+        <li><label>Start </label> <Select /></li>
+        <li><label>End </label> <Select /></li>
+        <button disabled>Find route (doesn't work yet)</button>
+        <li><button onClick={() => {setMapComponent(require('./MapComponentb.js')); setFloor(0)}}>Basement</button></li>
+        <li><button onClick={() => {setMapComponent(require('./MapComponentf1.js')); setFloor(1)}}>1st floor</button></li>
+        <li><button onClick={() => {setMapComponent(require('./MapComponentf2.js')); setFloor(2)}}>2nd floor</button></li>
+        <li><button onClick={() => {setMapComponent(require('./MapComponentf3.js')); setFloor(3)}}>3rd floor</button></li>
+        {floor !== -1 &&
+        <div className="scroll">
+          <li>
+            <IconButton aria-label="up" size="medium" onClick={() => setFloor(floor === 3? 0: floor + 1)}><KeyboardArrowUpIcon /></IconButton>
+          </li>
+          <li>
+            <IconButton aria-label="down" size="medium" onClick={() => setFloor(floor === 0? 3: floor - 1)}><KeyboardArrowDownIcon /></IconButton>
+          </li>
+        </div>}
       </ul>
 
+
       <figure>
-        {imageSrc && <img src={imageSrc} alt="Floor Plan" />}
+        {floor !== -1 && [<MapComponentb/>, <MapComponentf1/>, <MapComponentf2/>, <MapComponentf3/>][floor]}
       </figure>
+      <footer>
+        <p>Software Engineering 2, 2025</p>
+      </footer>
     </div>
   );
 }

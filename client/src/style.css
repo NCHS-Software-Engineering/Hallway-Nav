@@ -24,3 +24,10 @@ img {
   margin-right: auto;
   width: 50%;
 }
+
+.svgElement {
+  position:absolute;
+  width:100%;
+  height:100%;
+}
+
