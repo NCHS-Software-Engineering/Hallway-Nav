@@ -22,8 +22,8 @@ function App() {
       <div className="bg-red-600 min-h-screen flex items-center justify-center">
     </div>
       <ul>
-        <li><label>Start </label> <Select /></li>
-        <li><label>End </label> <Select /></li>
+        <li><label htmlFor="rooms-start">Start from </label> <Select idStr="rooms-start"/></li>
+        <li><label htmlFor="rooms-end">End at </label> <Select idStr="rooms-end"/></li>
         <button disabled>Find route (doesn't work yet)</button>
         <li><button onClick={() => {setMapComponent(require('./MapComponentb.js')); setFloor(0)}}>Basement</button></li>
         <li><button onClick={() => {setMapComponent(require('./MapComponentf1.js')); setFloor(1)}}>1st floor</button></li>

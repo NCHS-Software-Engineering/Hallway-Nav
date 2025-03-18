@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 
-const Select = () => {
+const Select = (props) => {
     const [options, setOptions] = useState([]);
-    
+
     useEffect(() => {
         const rooms = [
             "B1", "B2", "B3", "B4", "B05A", "B5", "B6",
@@ -50,13 +50,13 @@ const Select = () => {
 
         let roomSelection = [];
         for(let i = 0; i < rooms.length; i++) 
-            roomSelection.push(<option>{rooms[i]}</option>);
+            roomSelection.push(<option key={i}>{rooms[i]}</option>);
         setOptions(roomSelection);
     }, []);
 
     return (
         <>
-            <select>
+            <select id={props.idStr}>
                 {options}
             </select>
         </>
