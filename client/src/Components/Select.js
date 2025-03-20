@@ -29,7 +29,8 @@ const Select = (props) => {
             "211A", "211B", "212A", "212B", "212C", "212D",
             "212G", "212H", "212I", 213, 214, "214C"
         ], "3rd floor": [
-            "310K", "311A", "311B", "337A", "337B"
+            300, 301, 302, 303, 304, 305, 306, 307, 308, 309,
+            310, "310K", "311A", "311B"
         ]};
         
         for(let i = 0; i < 31; i++)
@@ -40,13 +41,17 @@ const Select = (props) => {
 
         for(let i = 15; i < 42; i++)
             rooms["2nd floor"].push(200 + i);
-        rooms["2nd floor"].join(["242A", "242B", 245, "245A"]);
+        rooms["2nd floor"] = rooms["2nd floor"].concat(["242A", "242B", 245, "245A"]);
         
-        for(let i = 0; i < 44; i++)
+        for(let i = 12; i < 36; i++)
         {
-            if([311, 329, 336, 337, 338].indexOf(300 + i) === -1)
+            if(300 + i !== 329)
                 rooms["3rd floor"].push(300 + i);
         }
+        rooms["3rd floor"] = rooms["3rd floor"].concat(["337A", "337B"]);
+
+        for(let i = 39; i < 44; i++)
+            rooms["3rd floor"].push(300 + i);
 
         let groups = [];
         let floors = ["Basement", "1st floor", "2nd floor", "3rd floor"];

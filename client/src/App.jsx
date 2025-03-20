@@ -32,10 +32,14 @@ function App() {
         {floor !== -1 &&
         <div className="scroll">
           <li>
-            <IconButton aria-label="up" size="medium" onClick={() => setFloor(floor === 3? 0: floor + 1)}><KeyboardArrowUpIcon /></IconButton>
+            <IconButton aria-label="up" size="medium" onClick={() => setFloor(floor === 3? 0: floor + 1)}>
+              <KeyboardArrowUpIcon /> {floor === 3? "Loop around to basement": "To higher floor"}
+            </IconButton>
           </li>
           <li>
-            <IconButton aria-label="down" size="medium" onClick={() => setFloor(floor === 0? 3: floor - 1)}><KeyboardArrowDownIcon /></IconButton>
+            <IconButton aria-label="down" size="medium" onClick={() => setFloor(floor === 0? 3: floor - 1)}>
+              <KeyboardArrowDownIcon /> {floor === 0? "Loop around to third floor": "To lower floor"}
+            </IconButton>
           </li>
         </div>}
       </ul>
