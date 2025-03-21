@@ -54,7 +54,7 @@ const Select = (props) => {
             rooms["3rd floor"].push(300 + i);
 
         let groups = [];
-        let floors = ["Basement", "1st floor", "2nd floor", "3rd floor"];
+        let floors = ["1st floor", "2nd floor", "3rd floor", "Basement"];
         for(let i = 0; i < 4; i++)
         {
             let roomSelection = [];
