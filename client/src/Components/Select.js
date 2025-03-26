@@ -58,7 +58,12 @@ const Select = (props) => {
         for(let i = 0; i < 4; i++)
         {
             let roomSelection = [];
-            const optgroup = (...rooms) => <optgroup key={floors[i][0]} label={floors[i]}>{rooms}</optgroup>;
+            const optgroup = (...rooms) =>
+            <>
+                <optgroup disabled key={"-" + floors[i][0]} label={"More floors " + (floors[i][0] !== "1" ? "above " : "") + (floors[i][0] !== "1" && floors[i][0] !== "B" ? "and " : "") + (floors[i][0] !== "B" ? "below " : "")}/>
+                <optgroup key={floors[i][0]} label={floors[i]}>{rooms}</optgroup>
+            </>;
+
             for(let j = 0; j < rooms[floors[i]].length; j++) 
                 roomSelection.push(<option key={j}>{rooms[floors[i]][j]}</option>);
             groups.push(optgroup(roomSelection));
