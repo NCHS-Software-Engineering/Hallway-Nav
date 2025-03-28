@@ -1,24 +1,32 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CSVReader {
-    public static void main(String[] args) {
-        String csvFile = "C:\\Users\\dkozlowski\\Documents\\GitHub\\Hallway-Nav\\client\\Pathfinding\\p3.csv";
+    Map<String, ArrayList<String>> nodeMap = new HashMap<>();
+    public CSVReader(String file)
+    {
+        String csvFile = file;
         String line;
         String delimiter = ",";
 
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
             while ((line = br.readLine()) != null) {
+                ArrayList<String> node = new ArrayList<>();
                 String[] values = line.split(delimiter);
                 // Access the values using their index
-                String info = ("ID: " + values[0] + ", Type " + values[1] + ", Connections: "+ values[4]);
-                int connections = Integer.parseInt(values[4]);
-                for(int i = 1; i <= connections; i++){
-                    info+= ", connection " + i + ": " + values[4+i];
-                }
+                for(int i=0; i<5; i++)
+                    node.add(values[i]);
 
-                System.out.println(info);
+                int connectionNum = Integer.parseInt(values[4]);
+                for(int i = 1; i <= connectionNum; i++){
+                    node.add(values[4+i]);
+                }
+                nodeMap.put(node.get(0), node);
                 }
 
                 }
@@ -27,4 +35,8 @@ public class CSVReader {
             e.printStackTrace();
         }
     }
+
+    public List<String> getPath(String start, String end)
+    {
+            }
 }
