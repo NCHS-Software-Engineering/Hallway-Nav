@@ -66,12 +66,13 @@ const Select = (props) => {
         {
             let roomSelection = [];
             const optgroup = (...rooms) =>
-                <optgroup key={floors[i][0]} label={floors[i] + ":"}>{rooms}</optgroup>;
+                <optgroup style={{backgroundColor: "#" + "fa8cd3".slice(i, i+3)}} key={floors[i][0]} label={floors[i] + ":"}>
+                    {rooms}
+                </optgroup>;
 
             for(let j = 0; j < rooms[floors[i]].length; j++) 
                 roomSelection.push(<option key={j+4}>{rooms[floors[i]][j]}</option>);
             groups = groups.concat([
-            floors[i][0] !== "1" ? <hr key={"hr" + floors[i][0]}/> : null,
             <optgroup disabled key={"-" + floors[i][0]} label={"Scroll " +
                                     (floors[i][0] !== "1" ? "up " : "") +
                                     (floors[i][0] !== "1" && floors[i][0] !== "B" ? "and " : "") +
