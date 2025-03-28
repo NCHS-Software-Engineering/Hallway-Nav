@@ -16,14 +16,14 @@ function App() {
   return (
     <div className="App">
       <header>
-          <p>Naperville Central class finder - by Pathfinders</p>
+          <p>Naperville Central class finder</p>
       </header>
       <Barcode />
       <div className="bg-red-600 min-h-screen flex items-center justify-center">
     </div>
       <ul>
-        <li><label>Start </label> <Select /></li>
-        <li><label>End </label> <Select /></li>
+        <li><label htmlFor="rooms-start">Start from room</label><Select idStr="rooms-start"/></li>
+        <li><label htmlFor="rooms-end">End at room</label><Select idStr="rooms-end"/></li>
         <button disabled>Find route (doesn't work yet)</button>
         <li><button onClick={() => {setMapComponent(require('./MapComponentb.js')); setFloor(0)}}>Basement</button></li>
         <li><button onClick={() => {setMapComponent(require('./MapComponentf1.js')); setFloor(1)}}>1st floor</button></li>
@@ -32,10 +32,14 @@ function App() {
         {floor !== -1 &&
         <div className="scroll">
           <li>
-            <IconButton aria-label="up" size="medium" onClick={() => setFloor(floor === 3? 0: floor + 1)}><KeyboardArrowUpIcon /></IconButton>
+            <IconButton aria-label="up" size="medium" onClick={() => setFloor(floor === 3? 0: floor + 1)}>
+              <KeyboardArrowUpIcon /> {floor === 3? "Loop around to basement": "To higher floor"}
+            </IconButton>
           </li>
           <li>
-            <IconButton aria-label="down" size="medium" onClick={() => setFloor(floor === 0? 3: floor - 1)}><KeyboardArrowDownIcon /></IconButton>
+            <IconButton aria-label="down" size="medium" onClick={() => setFloor(floor === 0? 3: floor - 1)}>
+              <KeyboardArrowDownIcon /> {floor === 0? "Loop around to third floor": "To lower floor"}
+            </IconButton>
           </li>
         </div>}
       </ul>
@@ -45,7 +49,7 @@ function App() {
         {floor !== -1 && [<MapComponentb/>, <MapComponentf1/>, <MapComponentf2/>, <MapComponentf3/>][floor]}
       </figure>
       <footer>
-        <p>Software Engineering 2, 2025</p>
+        <p>Pathfinders, 2025</p>
       </footer>
     </div>
   );
