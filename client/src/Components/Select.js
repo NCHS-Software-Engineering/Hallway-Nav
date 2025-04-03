@@ -22,8 +22,7 @@ const Select = (props) => {
             68, 69, 70, "70B", "70C", "70E", 71, "71B", 74, 75,
             "75A", 76, "76A", 77, "77B", 78, 79, 80, "81E", "81F",
             "81G", "81H", 82, "82B", 83, "83D", 84, 85, "85F", "85G",
-            86, 87, 88, "88A", "89A", "89E", 90, 94, "112A",
-            "124A", 155
+            86, 87, 88, "88A", "89A", "89E", 90, 94
         ], "2nd floor": [200, 201, 202, 203, 204, 205,
             206, 207, 208, 209, "210A", "210G",
             "211A", "211B", "212A", "212B", "212C", "212D",
@@ -33,11 +32,19 @@ const Select = (props) => {
             310, "310K", "311A", "311B"
         ]};
         
-        for(let i = 0; i < 31; i++)
+        for(let i = 0; i < 10; i++)
+            rooms["1st floor"].push(100 + i);
+
+        rooms["1st floor"] = rooms["1st floor"].concat([112, "112A"]);
+        for(let i = 13; i < 25; i++)
         {
-            if([111, 121, 122, 125].indexOf(100 + i) === -1)
+            if([121, 122].indexOf(100 + i) === -1)
                 rooms["1st floor"].push(100 + i);
         }
+        rooms["1st floor"].push("124A");
+        for(let i = 26; i < 31; i++)
+            rooms["1st floor"].push(100 + i);
+        rooms["1st floor"].push(155);
 
         for(let i = 15; i < 42; i++)
             rooms["2nd floor"].push(200 + i);
@@ -58,10 +65,21 @@ const Select = (props) => {
         for(let i = 0; i < 4; i++)
         {
             let roomSelection = [];
-            const optgroup = (...rooms) => <optgroup key={floors[i][0]} label={floors[i]}>{rooms}</optgroup>;
+            const optgroup = (...rooms) =>
+                <optgroup style={{backgroundColor: "#" + "fa8cd3".slice(i, i+3)}} key={floors[i][0]} label={floors[i] + ":"}>
+                    {rooms}
+                </optgroup>;
+
             for(let j = 0; j < rooms[floors[i]].length; j++) 
-                roomSelection.push(<option key={j}>{rooms[floors[i]][j]}</option>);
-            groups.push(optgroup(roomSelection));
+                roomSelection.push(<option key={j+4}>{rooms[floors[i]][j]}</option>);
+            groups = groups.concat([
+            <optgroup disabled key={"-" + floors[i][0]} label={"Scroll " +
+                                    (floors[i][0] !== "1" ? "up " : "") +
+                                    (floors[i][0] !== "1" && floors[i][0] !== "B" ? "and " : "") +
+                                    (floors[i][0] !== "B" ? "down " : "") + "for more floors."}/>,
+            optgroup(roomSelection),
+            <optgroup disabled key={"/-" + floors[i][0]} label={"End of " + floors[i].toLowerCase() + " rooms."}></optgroup>
+            ]);
         }
         setOptions(groups);
     }, []);
