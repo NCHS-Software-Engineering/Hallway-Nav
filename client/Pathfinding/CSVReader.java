@@ -1,42 +1,95 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.*;
+import java.util.*;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class CSVReader {
     Map<String, ArrayList<String>> nodeMap = new HashMap<>();
-    public CSVReader(String file)
-    {
-        String csvFile = file;
+
+    public CSVReader(String file) {
         String line;
         String delimiter = ",";
 
-        try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             while ((line = br.readLine()) != null) {
                 ArrayList<String> node = new ArrayList<>();
                 String[] values = line.split(delimiter);
-                // Access the values using their index
-                for(int i=0; i<5; i++)
-                    node.add(values[i]);
 
-                int connectionNum = Integer.parseInt(values[4]);
-                for(int i = 1; i <= connectionNum; i++){
-                    node.add(values[4+i]);
-                }
-                nodeMap.put(node.get(0), node);
+                if (values.length < 6) {
+                    System.out.println("Skipping invalid line: " + line);
+                    continue;
                 }
 
+                String nodeID = values[0].trim();
+                for (int i = 0; i < 5; i++) {
+                    node.add(values[i].trim());
                 }
-            
-         catch (IOException e) {
+
+                for (int i = 5; i < values.length; i++) {
+                    node.add(values[i].replaceAll("\"", "").trim());
+                }
+
+                nodeMap.put(nodeID, node);
+            }
+
+        } catch (IOException e) {
             e.printStackTrace();
+        }
+
+        System.out.println("Loaded Nodes: " + nodeMap.keySet());
+    }
+
+    public void initiate(String start, List<String> paths) {
+        start = start.trim();
+        paths.add(start);
+
+        ArrayList<String> dataPoint = nodeMap.get(start);
+        if (dataPoint == null) {
+            System.out.println("Warning: Node ID " + start + " not found.");
+            return;
+        }
+
+        for (int i = 5; i < dataPoint.size(); i++) {
+            String nextNode = dataPoint.get(i).trim();
+            pathGen(nextNode, paths);
         }
     }
 
-    public List<String> getPath(String start, String end)
-    {
+    public void pathGen(String start, List<String> paths) {
+        if (paths.contains(start)) {
+            return;
+        }
+
+        start = start.trim();
+        ArrayList<String> dataPoint = nodeMap.get(start);
+
+        if (dataPoint == null) {
+            System.out.println("Warning: Node ID " + start + " not found.");
+            return;
+        }
+
+        paths.add(start);
+
+        // Debugging output
+        System.out.println("Processing node: " + start);
+        System.out.println("Data: " + dataPoint);
+        System.out.println("Size: " + dataPoint.size());
+
+        if (dataPoint.get(1).equals("C") || dataPoint.get(1).equals("St")) {
+            System.out.println("Final path: " + paths);
+        } else {
+            for (int i = 5; i < dataPoint.size(); i++) {
+                String nextNode = dataPoint.get(i).trim();
+                pathGen(nextNode, paths);
             }
+        }
+    }
+
+    public static void main(String[] args) {
+        String csvFile = "/Users/yutian/Desktop/APCS/Hallway-Nav/client/Pathfinding/p3.csv";
+        CSVReader reader = new CSVReader(csvFile);
+
+        List<String> paths = new ArrayList<>();
+        reader.initiate("36", paths);
+    }
 }
