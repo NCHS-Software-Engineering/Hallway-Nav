@@ -19,8 +19,7 @@ function App() {
           <p>Naperville Central class finder</p>
       </header>
       <Barcode />
-      <div className="bg-red-600 min-h-screen flex items-center justify-center">
-    </div>
+      
       <ul>
         <li><label htmlFor="rooms-start">Start from room</label><Select idStr="rooms-start"/></li>
         <li><label htmlFor="rooms-end">End at room</label><Select idStr="rooms-end"/></li>
