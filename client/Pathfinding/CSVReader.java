@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
-import org.json.JSONArray;
-import org.json.JSONObject;
+import org.json.simple.JSONObject;
+
 
 public class CSVReader {
     Map<String, ArrayList<String>> nodeMap = new HashMap<>();
@@ -85,7 +85,8 @@ public class CSVReader {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
+        JSONObject obj = new JSONObject();
         String csvFile = "/Users/yutian/Desktop/APCS/Hallway-Nav/client/Pathfinding/p3.csv";
         CSVReader reader = new CSVReader(csvFile);
 
