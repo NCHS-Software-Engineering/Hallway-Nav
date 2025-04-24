@@ -28,18 +28,26 @@ class CSVReader:
     
 
 def initiate(node_map):  # Accept the actual node map
-    for node_id, data in node_map.items():
-        print(f"printing node {node_id}: {data}")
+    classes = []
+    for node_id, data in node_map.items(): 
+        if data[1] in ['St', 'C']:
+            classes.append(node_id)
+    print("dddd",classes)
+
+    with open("classes.json", "w") as aw:
+        json.dump(classes,aw)
+       # print(f"printing node {node_id}: {data}")
 
 
 def main():
     csv_file = "client/src/Cord/p3.csv"  # Changed backslash to forward slash for better compatibility
     reader = CSVReader(csv_file)
 
-    print("Node Map:", reader.node_map)
+    #print("Node Map:", reader.node_map)
     
     initiate(reader.node_map)  # Pass node_map to initiate()
 
 
 if __name__ == "__main__":
     main()
+# tommrow work on creating a file of the classrooms and stairs with filtering 
