@@ -88,7 +88,8 @@ ul :nth-child(odd) button {
 }
 
 figure {
-  margin: 0 33%;
+  margin-inline: 33% 0;
+  margin-block: 0;
 }
 
 #aside {
@@ -102,11 +103,29 @@ figure {
   border-right-width: 4px;
 }
 
-@media screen and (max-width: 950px) { #aside {
-  width: 100%;
-  top: 1300px;
-  padding: 0;
-  border-top-style: ridge;
-  border-top-width: 4px;
-  border-right-style: none;
-} #aside p {display: inline-flex; padding: 2px;} #aside hr ~ hr {display: none;}}
+@media screen and (max-width: 950px) {
+  #aside {
+    width: 100%;
+    top: 1300px;
+    padding: 0;
+    border-top-style: ridge;
+    border-top-width: 4px;
+    border-right-style: none;
+  } #aside p {display: inline-flex; padding: 2px;}
+    #aside hr ~ hr {display: none;}
+  figure {
+    margin-inline: calc(100% - 600px) 0;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  figure {
+    margin-inline: 0;
+  }
+}
+
+@media screen and (max-width: 310px) {
+  #aside {
+    top: calc(1300px + 10%);
+  }
+}
