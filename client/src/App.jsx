@@ -47,9 +47,9 @@ function App() {
       <figure>
         {floor !== -1 && [<MapComponentb/>, <MapComponentf1/>, <MapComponentf2/>, <MapComponentf3/>][floor]}
       </figure>
-      <div id="aside" style={{position: "absolute", left: 0, top: "108px", backgroundColor: "coral", padding: "10px 10px 1300px", margin: 0, borderRightStyle: "ridge", borderRightWidth: "4px"}}>
-        <p>Pathfinders, 2025.</p>
-        <p>Contributors:</p>
+      <div id="aside">
+        <p style={{fontStyle: "oblique"}}>Pathfinders, 2025.</p>
+        <p style={{fontWeight: 700}}>Contributors:</p>
         <hr />
         <p>Shawn Plackiyil.</p>
         <p>Daniel Kozlowski.</p>

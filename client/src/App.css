@@ -90,3 +90,23 @@ ul :nth-child(odd) button {
 figure {
   margin: 0 33%;
 }
+
+#aside {
+  position: absolute;
+  left: 0;
+  top: 108px;
+  background-color: coral;
+  padding: 10px 10px 1300px;
+  margin: 0;
+  border-right-style: ridge;
+  border-right-width: 4px;
+}
+
+@media screen and (max-width: 950px) { #aside {
+  width: 100%;
+  top: 1300px;
+  padding: 0;
+  border-top-style: ridge;
+  border-top-width: 4px;
+  border-right-style: none;
+} #aside p {display: inline-flex; padding: 2px;} #aside hr ~ hr {display: none;}}
