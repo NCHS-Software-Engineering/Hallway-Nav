@@ -28,19 +28,29 @@ class CSVReader:
     
 
 def initiate(node_map):  # Accept the actual node map
-    classes = []
+    try:
+        with open('classes.json', 'r') as f:
+            all_classes = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        all_classes = []
+
+
+    current_classes = []
+
     for node_id, data in node_map.items(): 
-        if data[1] in ['St', 'C']:
-            classes.append(node_id)
-    print("dddd",classes)
+        if data[1] not in ['A', 'P']:
+            current_classes.append(node_id)
+    #print("dddd",classes)
+
+    all_classes.append(current_classes)
 
     with open("classes.json", "w") as aw:
-        json.dump(classes,aw)
+        json.dump(all_classes,aw)
        # print(f"printing node {node_id}: {data}")
 
 
 def main():
-    csv_file = "client/src/Cord/p3.csv"  # Changed backslash to forward slash for better compatibility
+    csv_file = "client/src/Cord/p3.csv"  # Changed backslash to forward slash for better compatibility (can adjust name for file selection)
     reader = CSVReader(csv_file)
 
     #print("Node Map:", reader.node_map)
