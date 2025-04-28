@@ -2,7 +2,6 @@ import json
 import csv
 from collections import defaultdict
 
-
 class CSVReader:
     def __init__(self, file):
         self.node_map = {}
@@ -24,8 +23,7 @@ class CSVReader:
         except IOError as e:
             print(f"IO error: {e}")
 
-        print("Loaded Nodes:", self.node_map.keys())
-    
+       # print("Loaded Nodes:", self.node_map.keys())
 
 def initiate(node_map):  # Accept the actual node map
     try:
@@ -34,19 +32,31 @@ def initiate(node_map):  # Accept the actual node map
     except (FileNotFoundError, json.JSONDecodeError):
         all_classes = []
 
-
     current_classes = []
-
-    for node_id, data in node_map.items(): 
-        if data[1] not in ['A', 'P']:
-            current_classes.append(node_id)
-    #print("dddd",classes)
-
-    all_classes.append(current_classes)
-
+    try:
+        with open('client\src\Cord\path3.json', 'r') as f:
+            floor_classes = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        floor_classes = []
+        
     with open("classes.json", "w") as aw:
-        json.dump(all_classes,aw)
-       # print(f"printing node {node_id}: {data}")
+        json.dump(all_classes, aw)
+
+        floor = all_classes[2]
+
+        print(f"Floor: {floor}")
+    print(floor_classes)
+    for classes in floor:
+        for paths in floor_classes:
+           if paths[len(paths)-1] ==  classes:
+               print("n")
+               
+               
+                
+
+
+
+
 
 
 def main():
@@ -60,4 +70,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-# tommrow work on creating a file of the classrooms and stairs with filtering 
+    

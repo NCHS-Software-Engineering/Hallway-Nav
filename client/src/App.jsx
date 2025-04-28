@@ -13,7 +13,7 @@ import MapComponentf3 from "./MapComponentf3"; // Import the component
 function App() {
   const [floor, setFloor] = useState(-1);
   const [MapComponent, setMapComponent] = useState(null);
-  return (
+  return (<>
     <div className="App">
       <header>
           <p>Naperville Central class finder</p>
@@ -25,9 +25,9 @@ function App() {
         <li><label htmlFor="rooms-end">End at room</label><Select idStr="rooms-end"/></li>
         <button disabled>Find route (doesn't work yet)</button>
         <li><button onClick={() => {setMapComponent(require('./MapComponentb.js')); setFloor(0)}}>Basement</button></li>
-        <li><button onClick={() => {setMapComponent(require('./MapComponentf1.js')); setFloor(1)}}>1st floor</button></li>
-        <li><button onClick={() => {setMapComponent(require('./MapComponentf2.js')); setFloor(2)}}>2nd floor</button></li>
-        <li><button onClick={() => {setMapComponent(require('./MapComponentf3.js')); setFloor(3)}}>3rd floor</button></li>
+        <li><button onClick={() => {setMapComponent(require('./MapComponentf1.js')); setFloor(1)}}>1<sup>st</sup> floor</button></li>
+        <li><button onClick={() => {setMapComponent(require('./MapComponentf2.js')); setFloor(2)}}>2<sup>nd</sup> floor</button></li>
+        <li><button onClick={() => {setMapComponent(require('./MapComponentf3.js')); setFloor(3)}}>3<sup>rd</sup> floor</button></li>
         {floor !== -1 &&
         <div className="scroll">
           <li>
@@ -37,7 +37,7 @@ function App() {
           </li>
           <li>
             <IconButton aria-label="down" size="medium" onClick={() => setFloor(floor === 0? 3: floor - 1)}>
-              <KeyboardArrowDownIcon /> {floor === 0? "Loop around to third floor": "To lower floor"}
+              <KeyboardArrowDownIcon /> {floor === 0? "Loop around to floor 3": "To lower floor"}
             </IconButton>
           </li>
         </div>}
@@ -57,8 +57,14 @@ function App() {
         <p>Fionn McCabeWild.</p>
         <hr />
       </div>
+      <div id="floor" style={{backgroundColor: "#" + "fa8cd3".slice(floor, floor+3)}}>
+        Displaying {["awaited", "basement", `floor 1`, "floor 2", "floor 3"][floor+1]}.
+      </div>
     </div>
-  );
+    <script>
+      
+    </script>
+  </>);
 }
 
 export default App;
