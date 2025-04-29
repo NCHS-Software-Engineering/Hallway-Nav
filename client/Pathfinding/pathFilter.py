@@ -1,6 +1,7 @@
 import json
 import csv
 from collections import defaultdict
+from math import sqrt
 
 class CSVReader:
     def __init__(self, file):
@@ -33,15 +34,15 @@ def initiate(node_map):
         all_classes = []
 
     try:
-        with open('client/src/Cord/path3.json', 'r') as f:
+        with open('client/src/Cord/path3.json', 'r') as f: #Change accordingly
             floor_classes = json.load(f)
     except (FileNotFoundError, json.JSONDecodeError):
-        print("Could not load path3.json")
+        print("Could not load path3.json")#Change accordinngly
         return
 
    
 
-    floor = all_classes[2]  # Choose floor
+    floor = all_classes[2]  # Choose floor (change accordingly)
 
     for class_id in floor:
         current_paths = []  # Resets for next class id
@@ -52,31 +53,40 @@ def initiate(node_map):
         if current_paths: # Checks if there are any content
             print(f"\nPaths to destination {class_id}:") # Debug for destination
             for p in current_paths: #Prints out the paths in a list
-                print(p) #Checks
-            process(current_paths)
+                print(p) #Checks (current_paths is a nested list)
+            process(current_paths, node_map)
 
                
-def process(current_paths):
+def calculate_total_distance(path, node_map):
+    total = 0.0
+    for i in range(len(path) - 1):
+        node_a = node_map[path[i]]
+        node_b = node_map[path[i + 1]]
+        x1, y1 = float(node_a[2]), float(node_a[3])
+        x2, y2 = float(node_b[2]), float(node_b[3])
+        total += sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
+    return total
+
+def process(curPaths, node_map):
+    print("Verify: ", curPaths, "Length:", len(curPaths))
+
     try:
-        with open('classes.json', 'r') as f:
+        with open('finalFilter.json', 'r') as f:
             all_classes = json.load(f)
     except (FileNotFoundError, json.JSONDecodeError):
         all_classes = []
 
+    # Select the shortest path based on total Euclidean distance
+    shortest_path = min(curPaths, key=lambda path: calculate_total_distance(path, node_map))
+    print("Shortest path:", shortest_path)
+
+    all_classes.append(shortest_path)
+
+    with open('finalFilter.json', 'w') as f:
+        json.dump(all_classes, f, indent=2)
+
     
-    if len(current_paths) == 1:
-         all_classes.append(current_paths)
-         with open("thirdFilter.json", "w") as aw:
-            json.dump(all_classes, aw)
-    else:
-        for path in current_paths:
-            #Start calculating distance
-            print()
-
-
-
-
-
+   
 
 
 def main():
