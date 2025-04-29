@@ -57,13 +57,10 @@ function App() {
         <p>Fionn McCabeWild.</p>
         <hr />
       </div>
-      <div id="floor" style={{backgroundColor: "#" + "fa8cd3".slice(floor, floor+3)}}>
+      <div id="floor" style={{backgroundColor: "#" + "cd3fa8a8c8cd".slice(3*floor, 3*floor+3)}}>
         Displaying {["awaited", "basement", `floor 1`, "floor 2", "floor 3"][floor+1]}.
       </div>
     </div>
-    <script>
-      
-    </script>
   </>);
 }
 
