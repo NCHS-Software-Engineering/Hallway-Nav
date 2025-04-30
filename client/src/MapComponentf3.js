@@ -3,8 +3,7 @@ import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import CustomMap from "./maps/f3.svg"; // Import the SVG file
 import "./App.css";
 function readAltText() {
-  const img = document.querySelector('img');
-  const utterance = new SpeechSynthesisUtterance(img.alt);
+  const utterance = new SpeechSynthesisUtterance("This is the third floor");
   speechSynthesis.speak(utterance);
 }
 export default function MapComponentf3() {
@@ -15,7 +14,7 @@ export default function MapComponentf3() {
         <img src={CustomMap} alt="Custom SVG Map" className="w-full h-auto"/>
           <svg width="600" height="600" viewBox="0 0 500 500"></svg>
           <img alt="This is the third floor"></img>
-          <button onclick={readAltText()}>Describe image</button>
+          <button onClick={readAltText()}>Describe image</button>
           <script src="tts.js"></script>
         </TransformComponent>
       </TransformWrapper>
