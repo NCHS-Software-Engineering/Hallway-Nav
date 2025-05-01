@@ -76,6 +76,10 @@ button {
   border-radius: 8px;
 }
 
+svg ~ button {
+  position: absolute;
+}
+
 ul :nth-child(even) button {
   border-color: #949615;
   background-color: hsl(56, 92%, 51%);
