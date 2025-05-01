@@ -5,6 +5,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Barcode from './Components/Barcode';
 import Select from "./Components/Select";
+import Search from "./Components/Search";
 import MapComponentb from "./MapComponentb"; // Import the component
 import MapComponentf1 from "./MapComponentf1"; // Import the component
 import MapComponentf2 from "./MapComponentf2"; // Import the component
@@ -13,6 +14,7 @@ import MapComponentf3 from "./MapComponentf3"; // Import the component
 function App() {
   const [floor, setFloor] = useState(-1);
   const [MapComponent, setMapComponent] = useState(null);
+  const [room, setRoom] = useState(0);
   return (<>
     <div className="App">
       <header>
@@ -21,9 +23,8 @@ function App() {
       <Barcode />
       
       <ul>
-        <li><label htmlFor="rooms-start">Start from room</label><Select idStr="rooms-start"/></li>
-        <li><label htmlFor="rooms-end">End at room</label><Select idStr="rooms-end"/></li>
-        <button disabled>Find route (doesn't work yet)</button>
+        <li><label htmlFor="rooms-end">Where is...</label><Select idStr="rooms-end" value={room}/></li>
+        <li><button onClick={(Search())}>Route</button></li>
         <li><button onClick={() => {setMapComponent(require('./MapComponentb.js')); setFloor(0)}}>Basement</button></li>
         <li><button onClick={() => {setMapComponent(require('./MapComponentf1.js')); setFloor(1)}}>1<sup>st</sup> floor</button></li>
         <li><button onClick={() => {setMapComponent(require('./MapComponentf2.js')); setFloor(2)}}>2<sup>nd</sup> floor</button></li>

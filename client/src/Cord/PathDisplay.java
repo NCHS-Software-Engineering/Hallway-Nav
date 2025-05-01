@@ -10,15 +10,15 @@ class PathDisplay {
     private String current;
 
     public static void main(String[] args) {
-        PathDisplay test = new PathDisplay("0100");
+        PathDisplay test = new PathDisplay("0309");
         System.out.println(test.Find());
     }
 
     public PathDisplay(String end) {
         finish = end;
         String floor = finish.substring(1, 2);
-        try {paths = new Scanner(new File("client/src/Cord/test" + floor + ".json"));}
-        catch(FileNotFoundException e){System.out.println("client/src/Cord/test" + floor + ".json");}
+        try {paths = new Scanner(new File("finalFilter.json"));}
+        catch(FileNotFoundException e){System.out.println("Don't Work");}
     }
 
     public ArrayList<String> Find() {
@@ -46,7 +46,7 @@ class PathDisplay {
             {
                 while(path.size() > 0)
                 {
-                    path.remove(path.size());
+                    path.remove(path.size()-1);
                 }
             }
         }
