@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 const Select = (props) => {
     const [options, setOptions] = useState([]);
-
+    const [bg, setBg] = useState("#fa8");
     useEffect(() => {
         let rooms = {
             "Basement": [
@@ -84,11 +84,19 @@ const Select = (props) => {
         setOptions(groups);
     }, []);
 
+    const onChange = (e) => {
+        setBg(
+            /3\d{2}/.test(e.target.value) ? "#8cd" :
+           (/2\d{2}/.test(e.target.value) ? "#a8c" :
+           (/^B/.test(e.target.value) ? "#cd3" : "#fa8"))
+        );
+    };
+
     return (
         <>
-            <select id={props.idStr}>
+            <select id={props.idStr} onChange={onChange} style={{backgroundColor: bg}}>
                 {options}
-            </select>
+            </select><style>{`label[for=${props.idStr}]::after {background-color: ${bg}}`}</style>
         </>
     );
 };
