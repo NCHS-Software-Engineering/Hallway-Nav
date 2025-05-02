@@ -3,7 +3,6 @@ import './App.css';
 import IconButton from '@mui/material/IconButton';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import Barcode from './Components/Barcode';
 import Select from "./Components/Select";
 import MapComponentb from "./MapComponentb";
 import MapComponentf1 from "./MapComponentf1";
@@ -24,7 +23,9 @@ function App() {
   };
 
   const handleSelectChange = (e) => {
-    setRoom(e.target.value);
+    const selectedRoom = e.target.value;
+    setRoom(selectedRoom);
+    console.log('Selected Room:', selectedRoom);
   };
 
   return (
@@ -33,8 +34,6 @@ function App() {
         <header>
           <p>Naperville Central class finder</p>
         </header>
-
-        <Barcode />
 
         <ul>
           <li>
