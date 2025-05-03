@@ -3,7 +3,6 @@ import './App.css';
 import IconButton from '@mui/material/IconButton';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import Barcode from './Components/Barcode';
 import Select from "./Components/Select";
 import MapComponentb from "./MapComponentb";
 import MapComponentf1 from "./MapComponentf1";
@@ -26,17 +25,7 @@ function App() {
   const handleSelectChange = (e) => {
     const selectedRoom = e.target.value;
     setRoom(selectedRoom);
-
-    // Determine floor based on room number/prefix
-    if (/^B/.test(selectedRoom)) {
-      setFloor(0); // Basement
-    } else if (/^1?\d{2}[A-Z]*$/.test(selectedRoom)) {
-      setFloor(1); // 1st floor
-    } else if (/^2\d{2}[A-Z]*$/.test(selectedRoom)) {
-      setFloor(2); // 2nd floor
-    } else if (/^3\d{2}[A-Z]*$/.test(selectedRoom)) {
-      setFloor(3); // 3rd floor
-    }
+    console.log('Selected Room:', selectedRoom);
   };
 
   return (
@@ -46,12 +35,10 @@ function App() {
           <p>Naperville Central class finder</p>
         </header>
 
-        <Barcode />
-
         <ul>
           <li>
             <label htmlFor="rooms-end">Where is...</label>
-            <Select idStr="rooms-end" value={room} onChange={handleSelectChange} setFloor={setFloor} />
+            <Select idStr="rooms-end" value={room} onChange={handleSelectChange} />
           </li>
           <li>
             <button onClick={handleSearch}>Route</button>
