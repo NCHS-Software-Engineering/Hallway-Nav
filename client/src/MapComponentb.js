@@ -14,11 +14,16 @@ export default function MapComponentb() {
         <TransformComponent>
         <img src={CustomMap} alt="This is the basement floor" className="w-full h-auto"/>
           <svg width="600" height="600" viewBox="0 0 500 500"></svg>
-          <button onClick={readAltText()} style={{
-            top: "147px",
-            left: "21px",
-            borderRadius: "0 0 8px 0",
-            borderWidth: "0 2px 2px 0"}}>Describe image</button>
+          <button id="svg-button-base" onClick={readAltText()}>Describe image</button>
+          <style>{`
+          #svg-button-base {
+            top: 147px;
+            left: 21px;
+            border-radius: 0 0 8px 0;
+            border-width: 0 2px 2px 0;
+          }
+          `}
+          </style>
           <script src="tts.js"></script>
           
         </TransformComponent>
