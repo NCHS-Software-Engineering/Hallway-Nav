@@ -8,6 +8,7 @@ import MapComponentb from "./MapComponentb";
 import MapComponentf1 from "./MapComponentf1";
 import MapComponentf2 from "./MapComponentf2";
 import MapComponentf3 from "./MapComponentf3";
+import JsonRead from "./Components/JsonRead";
 
 function App() {
   const [floor, setFloor] = useState(-1);
@@ -19,6 +20,7 @@ function App() {
     } else {
       alert(`Routing to room: ${room}`);
       // Logic to compute/display path can go here
+      //JsonRead();
     }
   };
 
