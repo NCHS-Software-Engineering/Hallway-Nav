@@ -20,7 +20,7 @@ function App() {
     } else {
       alert(`Routing to room: ${room}`);
       // Logic to compute/display path can go here
-      //JsonRead();
+     
     }
   };
 
@@ -57,6 +57,7 @@ function App() {
           <li>
             <button onClick={() => setFloor(3)}>3<sup>rd</sup> floor</button>
           </li>
+          <JsonRead src="finalFilter.json" csvSrc="p1.csv" backgroundImage="firstFloor.png" endId={room}/>
 
           {floor !== -1 && (
             <div className="scroll">

@@ -4,9 +4,9 @@ import Papa from 'papaparse'; // Import papaparse for CSV parsing
 //needs some tweaking and additional code in App.jsx for dealing with multiple floors, but theoretically this should work for drawing the path on top of the map and then return it in html.
 
 const NodeCanvas = ({ 
-  src = '/nodes.json', 
-  csvSrc = '/coordinates.csv', 
-  backgroundImage = '/background.jpg',
+  src = 'C:\Desktop\Software Engineering\Hallway-Nav\finalFilter.json', 
+  csvSrc = '/p1.csv', 
+  backgroundImage = '/',
   endId = 6  // Accept the end node ID as a prop
 }) => {
   const [nodes, setNodes] = useState([]);
