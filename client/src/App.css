@@ -76,8 +76,12 @@ button {
   border-radius: 8px;
 }
 
-svg ~ button {
+img ~ button {
   position: absolute;
+} img ~ button:active {
+  background-color: hsla(0, 0%, 94%, 0.502);
+} @media screen and (max-width: 1150px) {
+  img ~ button:not(#svg-button-base) {border-radius: 8px !important; border-width: 2px !important}
 }
 
 ul :nth-child(even) button {
@@ -101,7 +105,7 @@ figure {
   left: 0;
   top: 108px;
   background-color: coral;
-  padding: 10px 10px 1300px;
+  padding: 10px 10px 1040px;
   margin: 0;
   border-right-style: ridge;
   border-right-width: 4px;
@@ -115,7 +119,7 @@ figure {
   top: 630px;
 }
 
-@media screen and (max-width: 950px) {
+@media screen and (max-width: 909px) {
   #aside {
     width: 100%;
     top: 1300px;

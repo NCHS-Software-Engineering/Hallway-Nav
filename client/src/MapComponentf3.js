@@ -14,12 +14,15 @@ export default function MapComponentf3() {
         <img src={CustomMap} alt="Custom SVG Map" className="w-full h-auto"/>
           <svg width="600" height="600" viewBox="0 0 500 500"></svg>
           <img alt="This is the third floor"></img>
-          <button onClick={readAltText()} style={{
-            top: "114px",
-            left: "1px",
-            borderRadius: "0 0 8px 0",
-            borderWidth: "0 2px 2px 0"
-          }}>Describe image</button>
+          <button onClick={readAltText()} id="svg-button-third">Describe image</button>
+          <style>{`
+            #svg-button-third {
+              top: 114px;
+              right: 180px;
+              border-radius: 0 0 0 8px;
+              border-width: 0 0 2px 2px;
+            }
+          `}</style>
           <script src="tts.js"></script>
         </TransformComponent>
       </TransformWrapper>

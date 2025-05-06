@@ -14,12 +14,16 @@ export default function MapComponentf1() {
         <img src={CustomMap} alt="Custom SVG Map" className="w-full h-auto"/>
           <svg width="600" height="600" viewBox="0 0 500 500"></svg>
           <img alt="This is the First Floor"></img>
-          <button onClick={readAltText()} style={{
-            top: "537px",
-            left: "1px",
-            borderRadius: "0 8px 0 0",
-            borderWidth: "2px 2px 0 0"
-        }}>Describe image</button>
+          <button onClick={readAltText()} id="svg-button-first">Describe image</button>
+          <style>{`
+            #svg-button-first {
+              top: 537px;
+              left: 1px;
+              border-radius: 0 8px 0 0;
+              border-width: 2px 2px 0 0;
+            }
+            @media screen and (max-width: 1150px) {#svg-button-first {top: calc(537px - (909px - 100%))}}
+          `}</style>
           <script src="tts.js"></script>
         </TransformComponent>
       </TransformWrapper>

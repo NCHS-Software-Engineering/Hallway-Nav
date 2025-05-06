@@ -12,7 +12,7 @@ import JsonRead from "./Components/JsonRead";
 
 function App() {
   const [floor, setFloor] = useState(-1);
-  const [room, setRoom] = useState("");
+  const [room, setRoom] = useState(10);
 
   const handleSearch = () => {
     if (!room) {
