@@ -1,13 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
-import Papa from 'papaparse'; // Import papaparse for CSV parsing
-
-//needs some tweaking and additional code in App.jsx for dealing with multiple floors, but theoretically this should work for drawing the path on top of the map and then return it in html.
+import React, { useEffect, useRef, useState, useCallback } from 'react';
+import Papa from 'papaparse';
 
 const NodeCanvas = ({ 
-  src = 'C:\Desktop\Software Engineering\Hallway-Nav\finalFilter.json', 
+  src = '\\finalFilter.json', 
   csvSrc = '/p1.csv', 
-  backgroundImage = '/',
-  endId = 6  // Accept the end node ID as a prop
+  backgroundImage = '/firstFloor.png',
+  endId = 6  
 }) => {
   const [nodes, setNodes] = useState([]);
   const [connections, setConnections] = useState([]);
@@ -33,9 +31,9 @@ const NodeCanvas = ({
       download: true,
       complete: (result) => {
         const parsedNodes = result.data.map((row) => ({
-          id: parseInt(row.id),  // Ensure `id` is a number
-          x: parseFloat(row.x),  // Ensure `x` is a number
-          y: parseFloat(row.y),  // Ensure `y` is a number
+          ID: parseInt(row.ID), 
+          X: parseFloat(row.X), 
+          Y: parseFloat(row.Y),
         }));
         setNodes(parsedNodes);
       },
@@ -45,10 +43,9 @@ const NodeCanvas = ({
     });
   }, [src, csvSrc]);
 
-  // Function to find the path to the end node using BFS
-  const findPath = (endId) => {
+  const findPath = useCallback((endId) => {
     let visited = new Set();
-    let queue = [[1]]; // Start from node 1, change as needed
+    let queue = [[1]]; 
     let path = [];
 
     while (queue.length > 0) {
@@ -63,7 +60,6 @@ const NodeCanvas = ({
       if (!visited.has(lastNodeId)) {
         visited.add(lastNodeId);
 
-        // Get all connections for the current node
         let nextNodes = connections.filter(
           ([start, end]) => start === lastNodeId || end === lastNodeId
         );
@@ -77,70 +73,73 @@ const NodeCanvas = ({
       }
     }
     setPath(path);
-  };
+  }, [connections]);
 
   useEffect(() => {
     if (endId) {
       findPath(endId);
     }
-  }, [endId, connections]);
+  }, [endId, connections, findPath]);
 
-  // Function to draw nodes and connections on the canvas
-  const drawCanvas = () => {
+  const drawCanvas = useCallback(() => {
     const canvas = canvasRef.current;
+    if (!canvas) {
+      console.error('Canvas not available');
+      return;
+    }
+
     const ctx = canvas.getContext('2d');
     const background = new Image();
     background.src = backgroundImage;
 
-    // Draw the background image after it has loaded
     background.onload = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas before redrawing
+      console.log('Background image loaded');
+      canvas.height = background.height;
+      canvas.width = background.width;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
-      // Draw connections for the nodes that are part of the path
       for (let i = 0; i < path.length - 1; i++) {
-        const startNode = nodes.find((node) => node.id === path[i]);
-        const endNode = nodes.find((node) => node.id === path[i + 1]);
+        const startNode = nodes.find((node) => node.ID === path[i]);
+        const endNode = nodes.find((node) => node.ID === path[i + 1]);
 
         if (startNode && endNode) {
           ctx.beginPath();
-          ctx.moveTo(startNode.x, startNode.y);
-          ctx.lineTo(endNode.x, endNode.y);
-          ctx.strokeStyle = '#ff0000'; // Red lines for the connections
+          ctx.moveTo(startNode.X, startNode.Y);
+          ctx.lineTo(endNode.X, endNode.Y);
+          ctx.strokeStyle = '#ff0000';
           ctx.lineWidth = 2;
           ctx.stroke();
         }
       }
 
-      // Draw nodes that are part of the path
       path.forEach((nodeId) => {
-        const node = nodes.find((n) => n.id === nodeId);
+        const node = nodes.find((n) => n.ID === nodeId);
         if (node) {
           ctx.beginPath();
-          ctx.arc(node.x, node.y, 10, 0, 2 * Math.PI);
-          ctx.fillStyle = 'blue'; // Node color
+          ctx.arc(node.X, node.Y, 10, 0, 2 * Math.PI);
+          ctx.fillStyle = 'blue';
           ctx.fill();
           ctx.stroke();
         }
       });
     };
-  };
+
+    background.onerror = () => {
+      console.error('Failed to load background image');
+    };
+  }, [backgroundImage, path, nodes]);
 
   useEffect(() => {
-    if (path.length > 0) {
+    if (path.length > 0 && nodes.length > 0) {
       drawCanvas();
     }
-  }, [path, nodes, connections]);
+  }, [path, nodes, connections, drawCanvas]);
 
   return (
     <div>
       <h1>Node Network to End Node {endId}</h1>
-      <canvas
-        ref={canvasRef}
-        width={800}  // Set the canvas size to match your background image size
-        height={600}
-        style={{ border: '1px solid black' }}
-      />
+      <canvas ref={canvasRef} width={800} height={600} style={{ border: '1px solid black' }} />
     </div>
   );
 };
