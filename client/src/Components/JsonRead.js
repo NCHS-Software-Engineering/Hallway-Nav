@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState, useCallback } from 'react';
 import Papa from 'papaparse';
 
 const NodeCanvas = ({ 
-  src = '\\finalFilter.json', 
+  src = '/finalFilter.json', 
   csvSrc = '/p1.csv', 
   backgroundImage = '/firstFloor.png',
   endId = 6  
@@ -21,14 +21,12 @@ const NodeCanvas = ({
       })
       .then((json) => {
         setConnections(json.connections);
-      })
-      .catch((err) => {
-        console.error('Error loading node connections:', err);
       });
 
     // Fetch and parse the CSV data containing node coordinates
     Papa.parse(csvSrc, {
       download: true,
+      header: true,
       complete: (result) => {
         const parsedNodes = result.data.map((row) => ({
           ID: parseInt(row.ID), 
@@ -36,9 +34,6 @@ const NodeCanvas = ({
           Y: parseFloat(row.Y),
         }));
         setNodes(parsedNodes);
-      },
-      error: (err) => {
-        console.error('Error parsing CSV file:', err);
       }
     });
   }, [src, csvSrc]);
@@ -76,17 +71,15 @@ const NodeCanvas = ({
   }, [connections]);
 
   useEffect(() => {
+    
     if (endId) {
+      console.log(endId);
       findPath(endId);
     }
   }, [endId, connections, findPath]);
 
   const drawCanvas = useCallback(() => {
     const canvas = canvasRef.current;
-    if (!canvas) {
-      console.error('Canvas not available');
-      return;
-    }
 
     const ctx = canvas.getContext('2d');
     const background = new Image();
