@@ -1,19 +1,19 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import Papa from 'papaparse';
 
-const NodeCanvas = ({ 
-  src = '\\finalFilter.json', 
-  csvSrc = '/p1.csv', 
+const NodeCanvas = ({
+  src = '/finalFilter.json',
+  csvSrc = '/p1.csv',
   backgroundImage = '/firstFloor.png',
-  endId = 6  
+  endId = 6
 }) => {
   const [nodes, setNodes] = useState([]);
   const [connections, setConnections] = useState([]);
   const [path, setPath] = useState([]);
   const canvasRef = useRef(null);
 
+  // Load connections and node coordinates
   useEffect(() => {
-    // Fetch the JSON data containing node connections
     fetch(src)
       .then((res) => {
         if (!res.ok) throw new Error(`Failed to fetch ${src}`);
@@ -26,61 +26,64 @@ const NodeCanvas = ({
         console.error('Error loading node connections:', err);
       });
 
-    // Fetch and parse the CSV data containing node coordinates
     Papa.parse(csvSrc, {
       download: true,
+      header: true,
       complete: (result) => {
         const parsedNodes = result.data.map((row) => ({
-          ID: parseInt(row.ID), 
-          X: parseFloat(row.X), 
+          ID: parseInt(row.ID),
+          X: parseFloat(row.X),
           Y: parseFloat(row.Y),
-        }));
+        })).filter((n) => !isNaN(n.ID) && !isNaN(n.X) && !isNaN(n.Y));
         setNodes(parsedNodes);
       },
       error: (err) => {
         console.error('Error parsing CSV file:', err);
-      }
+      },
     });
   }, [src, csvSrc]);
 
+  // Pathfinding
   const findPath = useCallback((endId) => {
     let visited = new Set();
-    let queue = [[1]]; 
-    let path = [];
+    let queue = [[1]];
+    let resultPath = [];
 
     while (queue.length > 0) {
-      let currentPath = queue.shift();
-      let lastNodeId = currentPath[currentPath.length - 1];
+      const currentPath = queue.shift();
+      const last = currentPath[currentPath.length - 1];
 
-      if (lastNodeId === endId) {
-        path = currentPath;
+      if (last === endId) {
+        resultPath = currentPath;
         break;
       }
 
-      if (!visited.has(lastNodeId)) {
-        visited.add(lastNodeId);
+      if (!visited.has(last)) {
+        visited.add(last);
 
-        let nextNodes = connections.filter(
-          ([start, end]) => start === lastNodeId || end === lastNodeId
+        const neighbors = connections.filter(
+          ([start, end]) => start === last || end === last
         );
 
-        nextNodes.forEach(([start, end]) => {
-          let nextNodeId = start === lastNodeId ? end : start;
-          if (!visited.has(nextNodeId)) {
-            queue.push([...currentPath, nextNodeId]);
+        neighbors.forEach(([start, end]) => {
+          const neighbor = start === last ? end : start;
+          if (!visited.has(neighbor)) {
+            queue.push([...currentPath, neighbor]);
           }
         });
       }
     }
-    setPath(path);
+
+    setPath(resultPath);
   }, [connections]);
 
   useEffect(() => {
-    if (endId) {
+    if (connections.length > 0) {
       findPath(endId);
     }
   }, [endId, connections, findPath]);
 
+  // Draw canvas
   const drawCanvas = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) {
@@ -89,35 +92,35 @@ const NodeCanvas = ({
     }
 
     const ctx = canvas.getContext('2d');
-    const background = new Image();
-    background.src = backgroundImage;
+    const image = new Image();
+    image.src = backgroundImage;
 
-    background.onload = () => {
-      console.log('Background image loaded');
-      canvas.height = background.height;
-      canvas.width = background.width;
+    image.onload = () => {
+      canvas.width = image.width;
+      canvas.height = image.height;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+      ctx.drawImage(image, 0, 0);
 
+      // Draw lines
       for (let i = 0; i < path.length - 1; i++) {
-        const startNode = nodes.find((node) => node.ID === path[i]);
-        const endNode = nodes.find((node) => node.ID === path[i + 1]);
-
+        const startNode = nodes.find(n => n.ID === path[i]);
+        const endNode = nodes.find(n => n.ID === path[i + 1]);
         if (startNode && endNode) {
           ctx.beginPath();
           ctx.moveTo(startNode.X, startNode.Y);
           ctx.lineTo(endNode.X, endNode.Y);
-          ctx.strokeStyle = '#ff0000';
+          ctx.strokeStyle = 'red';
           ctx.lineWidth = 2;
           ctx.stroke();
         }
       }
 
+      // Draw nodes
       path.forEach((nodeId) => {
         const node = nodes.find((n) => n.ID === nodeId);
         if (node) {
           ctx.beginPath();
-          ctx.arc(node.X, node.Y, 10, 0, 2 * Math.PI);
+          ctx.arc(node.X, node.Y, 8, 0, 2 * Math.PI);
           ctx.fillStyle = 'blue';
           ctx.fill();
           ctx.stroke();
@@ -125,16 +128,16 @@ const NodeCanvas = ({
       });
     };
 
-    background.onerror = () => {
-      console.error('Failed to load background image');
+    image.onerror = () => {
+      console.error('Failed to load background image:', backgroundImage);
     };
   }, [backgroundImage, path, nodes]);
 
   useEffect(() => {
-    if (path.length > 0 && nodes.length > 0) {
+    if (nodes.length && path.length) {
       drawCanvas();
     }
-  }, [path, nodes, connections, drawCanvas]);
+  }, [nodes, path, backgroundImage, drawCanvas]);
 
   return (
     <div>

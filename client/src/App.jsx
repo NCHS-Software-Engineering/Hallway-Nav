@@ -13,20 +13,35 @@ import JsonRead from "./Components/JsonRead";
 function App() {
   const [floor, setFloor] = useState(-1);
   const [room, setRoom] = useState(10);
+  const [route, setRoute] = useState(null);
 
-  const handleSearch = () => {
-    if (!room) {
-      alert("Please select a room first.");
-    } else {
-      alert(`Routing to room: ${room}`);
-      // Logic to compute/display path can go here
-     
+  let RenderedComponent;
+  if (route === null)
+  {
+
+  }
+  else if (route.length === 2){
+    RenderedComponent = <JsonRead src="finalFilter.json" csvSrc="p1.csv" backgroundImage="f1.svg" endId={room}/>;
+  }
+  else{
+    if(parseInt(room[0]) === 1){
+      RenderedComponent = <JsonRead src="finalFilter.json" csvSrc="p1.csv" backgroundImage="f1.svg" endId={room}/>;
     }
-  };
+    else if(parseInt(room[0]) === 2){
+      RenderedComponent = <ul><li><JsonRead src="finalFilter.json" csvSrc="p1.csv" backgroundImage="f1.svg" endId={27}/></li><li><JsonRead src="finalFilter.json" csvSrc="p2.csv" backgroundImage="f2.svg" endId={room}/></li></ul>; 
+    }
+    else if(parseInt(room[0]) === 3){
+      RenderedComponent = <ul><li><JsonRead src="finalFilter.json" csvSrc="p1.csv" backgroundImage="f1.svg" endId={27}/></li><li><JsonRead src="finalFilter.json" csvSrc="p3.csv" backgroundImage="f3.svg" endId={room}/></li></ul>; 
+    }
+    else{
+      RenderedComponent = <div>Sorry We Don't Have This Yet</div>;
+    }
+  }
 
   const handleSelectChange = (e) => {
     const selectedRoom = e.target.value;
     setRoom(selectedRoom);
+    setRoute(null);
     console.log('Selected Room:', selectedRoom);
   };
 
@@ -43,7 +58,7 @@ function App() {
             <Select idStr="rooms-end" value={room} onChange={handleSelectChange} />
           </li>
           <li>
-            <button onClick={handleSearch}>Route</button>
+            <button onClick={() => setRoute(room)}>Route</button>
           </li>
           <li>
             <button onClick={() => setFloor(0)}>Basement</button>
@@ -57,7 +72,9 @@ function App() {
           <li>
             <button onClick={() => setFloor(3)}>3<sup>rd</sup> floor</button>
           </li>
-          <JsonRead src="finalFilter.json" csvSrc="p1.csv" backgroundImage="firstFloor.png" endId={room}/>
+          <div>
+            {RenderedComponent}
+          </div>
 
           {floor !== -1 && (
             <div className="scroll">
