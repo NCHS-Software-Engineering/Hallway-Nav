@@ -25,6 +25,7 @@ const NodeCanvas = ({
 
     // Fetch and parse the CSV data containing node coordinates
     Papa.parse(csvSrc, {
+      delimiter: ",",
       download: true,
       header: true,
       complete: (result) => {
@@ -33,6 +34,7 @@ const NodeCanvas = ({
           X: parseFloat(row.X), 
           Y: parseFloat(row.Y),
         }));
+        console.log(result.data);
         setNodes(parsedNodes);
       }
     });
@@ -124,6 +126,7 @@ const NodeCanvas = ({
   }, [backgroundImage, path, nodes]);
 
   useEffect(() => {
+    console.log(path);
     if (path.length > 0 && nodes.length > 0) {
       drawCanvas();
     }
