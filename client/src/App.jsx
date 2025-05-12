@@ -21,17 +21,17 @@ function App() {
 
   }
   else if (route.length === 2){
-    RenderedComponent = <JsonRead src="finalFilter.json" csvSrc="p1.csv" backgroundImage="f1.svg" endId={room}/>;
+    RenderedComponent = <JsonRead src="finalFilter.json" csvSrc="p1.csv" backgroundImage="firstFloor2.png" endId={room}/>;
   }
   else{
     if(parseInt(room[0]) === 1){
-      RenderedComponent = <JsonRead src="finalFilter.json" csvSrc="p1.csv" backgroundImage="f1.svg" endId={room}/>;
+      RenderedComponent = <JsonRead src="finalFilter.json" csvSrc="p1.csv" backgroundImage="firstFloor2.png" endId={room}/>;
     }
     else if(parseInt(room[0]) === 2){
-      RenderedComponent = <ul><li><JsonRead src="finalFilter.json" csvSrc="p1.csv" backgroundImage="f1.svg" endId={27}/></li><li><JsonRead src="finalFilter.json" csvSrc="p2.csv" backgroundImage="f2.svg" endId={room}/></li></ul>; 
+      RenderedComponent = <ul><li><JsonRead src="finalFilter.json" csvSrc="p1.csv" backgroundImage="firstFloor2.png" endId={27}/></li><li><JsonRead src="finalFilter.json" csvSrc="p2.csv" backgroundImage="ff2.svg" endId={room}/></li></ul>; 
     }
     else if(parseInt(room[0]) === 3){
-      RenderedComponent = <ul><li><JsonRead src="finalFilter.json" csvSrc="p1.csv" backgroundImage="f1.svg" endId={27}/></li><li><JsonRead src="finalFilter.json" csvSrc="p3.csv" backgroundImage="f3.svg" endId={room}/></li></ul>; 
+      RenderedComponent = <ul><li><JsonRead src="finalFilter.json" csvSrc="p1.csv" backgroundImage="firstFloor2.png" endId={27}/></li><li><JsonRead src="finalFilter.json" csvSrc="p3.csv" backgroundImage="ff3.svg" endId={room}/></li></ul>; 
     }
     else{
       RenderedComponent = <div>Sorry We Don't Have This Yet</div>;
@@ -75,7 +75,6 @@ function App() {
           <div>
             {RenderedComponent}
           </div>
-
           {floor !== -1 && (
             <div className="scroll">
               <li>
@@ -101,6 +100,7 @@ function App() {
             </div>
           )}
         </ul>
+        
 
         <figure>
           {floor !== -1 &&
