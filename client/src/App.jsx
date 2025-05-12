@@ -73,16 +73,6 @@ function App() {
           <p>Fionn McCabeWild.</p>
           <hr />
         </div>
-
-        <div
-          id="floor"
-          style={{
-            backgroundColor: "#" + "cd3fa8a8c8cd".slice(3 * floor, 3 * floor + 3),
-          }}
-        >
-          Display
-          {[": awaiting..", "ing basement", "ing floor 1", "ing floor 2", "ing floor 3"][floor + 1]}.
-        </div>
       </div>
     </>
   );

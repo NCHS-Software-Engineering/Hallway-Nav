@@ -105,7 +105,7 @@ figure {
   left: 0;
   top: 108px;
   background-color: coral;
-  padding: 10px 10px 1040px;
+  padding: 10px 10px 1300px;
   margin: 0;
   border-right-style: ridge;
   border-right-width: 4px;
@@ -122,7 +122,7 @@ figure {
 @media screen and (max-width: 909px) {
   #aside {
     width: 100%;
-    top: 1300px;
+    top: 1600px;
     padding: 0;
     border-top-style: ridge;
     border-top-width: 4px;
