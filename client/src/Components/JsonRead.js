@@ -21,12 +21,10 @@ const NodeCanvas = ({
       })
       .then((json) => {
         setConnections(json.connections);
-      })
-      .catch((err) => {
-        console.error('Error loading node connections:', err);
       });
 
     Papa.parse(csvSrc, {
+      delimiter: ",",
       download: true,
       header: true,
       complete: (result) => {
@@ -34,12 +32,12 @@ const NodeCanvas = ({
           ID: parseInt(row.ID),
           X: parseFloat(row.X),
           Y: parseFloat(row.Y),
-        })).filter((n) => !isNaN(n.ID) && !isNaN(n.X) && !isNaN(n.Y));
+        }));
         setNodes(parsedNodes);
       },
       error: (err) => {
         console.error('Error parsing CSV file:', err);
-      },
+      }
     });
   }, [src, csvSrc]);
 
@@ -78,7 +76,7 @@ const NodeCanvas = ({
   }, [connections]);
 
   useEffect(() => {
-    if (connections.length > 0) {
+    if (endId) {
       findPath(endId);
     }
   }, [endId, connections, findPath]);
@@ -86,10 +84,6 @@ const NodeCanvas = ({
   // Draw canvas
   const drawCanvas = useCallback(() => {
     const canvas = canvasRef.current;
-    if (!canvas) {
-      console.error('Canvas not available');
-      return;
-    }
 
     const ctx = canvas.getContext('2d');
     const image = new Image();
@@ -134,7 +128,7 @@ const NodeCanvas = ({
   }, [backgroundImage, path, nodes]);
 
   useEffect(() => {
-    if (nodes.length && path.length) {
+    if (path.length > 0 && nodes.length > 0) {
       drawCanvas();
     }
   }, [nodes, path, backgroundImage, drawCanvas]);
