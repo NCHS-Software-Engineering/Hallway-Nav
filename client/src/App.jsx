@@ -60,52 +60,8 @@ function App() {
           <li>
             <button onClick={() => setRoute(room)}>Route</button>
           </li>
-          <li>
-            <button onClick={() => setFloor(0)}>Basement</button>
-          </li>
-          <li>
-            <button onClick={() => setFloor(1)}>1<sup>st</sup> floor</button>
-          </li>
-          <li>
-            <button onClick={() => setFloor(2)}>2<sup>nd</sup> floor</button>
-          </li>
-          <li>
-            <button onClick={() => setFloor(3)}>3<sup>rd</sup> floor</button>
-          </li>
-          <div>
-            {RenderedComponent}
-          </div>
-          {floor !== -1 && (
-            <div className="scroll">
-              <li>
-                <IconButton
-                  aria-label="up"
-                  size="medium"
-                  onClick={() => setFloor(floor === 3 ? 0 : floor + 1)}
-                >
-                  <KeyboardArrowUpIcon />
-                  {floor === 3 ? "Loop around to basement" : "To higher floor"}
-                </IconButton>
-              </li>
-              <li>
-                <IconButton
-                  aria-label="down"
-                  size="medium"
-                  onClick={() => setFloor(floor === 0 ? 3 : floor - 1)}
-                >
-                  <KeyboardArrowDownIcon />
-                  {floor === 0 ? "Loop around to floor 3" : "To lower floor"}
-                </IconButton>
-              </li>
-            </div>
-          )}
+          <div>{RenderedComponent}</div>
         </ul>
-        
-
-        <figure>
-          {floor !== -1 &&
-            [<MapComponentb />, <MapComponentf1 />, <MapComponentf2 />, <MapComponentf3 />][floor]}
-        </figure>
 
         <div id="aside">
           <p style={{ fontStyle: "oblique" }}>Pathfinders, 2025.</p>
