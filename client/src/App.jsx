@@ -67,10 +67,10 @@ function App() {
           <p style={{ fontStyle: "oblique" }}>Pathfinders, 2025.</p>
           <p style={{ fontWeight: 700 }}>Contributors:</p>
           <hr />
-          <p>Shawn Plackiyil.</p>
-          <p>Daniel Kozlowski.</p>
-          <p>Yutian Wang.</p>
-          <p>Fionn McCabeWild.</p>
+          <p>Shawn Plackiyil '25.</p>
+          <p>Daniel Kozlowski '26.</p>
+          <p>Yutian Wang '26.</p>
+          <p>Fionn McCabe-Wild '26.</p>
           <hr />
         </div>
       </div>
