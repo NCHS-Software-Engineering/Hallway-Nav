@@ -13,4 +13,4 @@ A [React](https://react.dev/)-based app to help NCHS students find their classro
 We are using Tableau to show the map and display everything.
 We are using the A star algorithm to find the shortest route to everything.
 We are converting the PNG files of each floor and importing them into CBI studios.
-Getting the map coordinates by filling the hallways with point and export them to React in CSV format. 
+Getting the map coordinates by filling the hallways with point and export them to React in CSV and JSON format. 
