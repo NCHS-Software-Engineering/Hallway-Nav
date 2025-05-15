@@ -4,7 +4,7 @@ import Papa from 'papaparse';
 const NodeCanvas = ({
   src = '\\finalFilter.json',
   csvSrc = '\\p1.csv',
-  backgroundImage = '\\firstFloor.png',
+  backgroundImage = '',
   endId = ""
 }) => {
   const [nodes, setNodes] = useState([]);
@@ -12,6 +12,7 @@ const NodeCanvas = ({
   const [path, setPath] = useState([]);
   const [width, setWidth] = useState([]);
   const [height, setHeight] = useState([]);
+  const [scale, setScale] = useState([]);
   const canvasRef = useRef(null);
 
   // Load connections and node coordinates
@@ -31,7 +32,7 @@ const NodeCanvas = ({
       header: true,
       complete: (result) => {
         const parsedNodes = result.data.map((row) => ({
-          ID: parseInt(row.ID),
+          ID: row.ID,
           X: parseFloat(row.X),
           Y: parseFloat(row.Y),
         }));
@@ -84,8 +85,8 @@ const NodeCanvas = ({
 
       // Draw lines
       for (let i = 0; i < path.length - 1; i++) {
-        const startId = parseInt(path[i]);
-        const endId = parseInt(path[i + 1]);
+        const startId = (path[i]);
+        const endId = (path[i + 1]);
       
         const startNode = nodes.find(n => n.ID === startId);
         const endNode = nodes.find(n => n.ID === endId);
@@ -104,7 +105,7 @@ const NodeCanvas = ({
 
       // Draw nodes
       path.forEach((nodeId) => {
-        const node = nodes.find(n => n.ID === parseInt(nodeId));
+        const node = nodes.find(n => n.ID === (nodeId));
         if (node) {
           ctx.beginPath();
           ctx.arc(node.X, width - node.Y -627, 8, 0, 2 * Math.PI);
@@ -123,6 +124,7 @@ const NodeCanvas = ({
   useEffect(() => {
     console.log(path);
     console.log(nodes);
+    if (csvSrc === 'p1.csv')
     if (path.length > 0 && nodes.length > 0) {
       drawCanvas();
     }
