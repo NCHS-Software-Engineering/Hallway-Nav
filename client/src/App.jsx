@@ -60,12 +60,12 @@ function App() {
           <li>
             <button onClick={() => setRoute(room)}>Route</button>
           </li>
-          <div>{RenderedComponent}</div>
+          {RenderedComponent}
         </ul>
 
         <div id="aside">
           <p style={{ fontStyle: "oblique" }}>Pathfinders, 2025.</p>
-          <p style={{ fontWeight: 700 }}>Contributors:</p>
+          <h4>Contributors</h4>
           <hr />
           <p>Shawn Plackiyil '25.</p>
           <p>Daniel Kozlowski '26.</p>
