@@ -13,20 +13,35 @@ import JsonRead from "./Components/JsonRead";
 function App() {
   const [floor, setFloor] = useState(-1);
   const [room, setRoom] = useState(10);
+  const [route, setRoute] = useState(null);
 
-  const handleSearch = () => {
-    if (!room) {
-      alert("Please select a room first.");
-    } else {
-      alert(`Routing to room: ${room}`);
-      // Logic to compute/display path can go here
-     
+  let RenderedComponent;
+  if (route === null)
+  {
+
+  }
+  else if (route.length === 2){
+    RenderedComponent = <JsonRead src="finalFilter.json" csvSrc="p1.csv" backgroundImage="firstFloor2.png" endId={room}/>;
+  }
+  else{
+    if(parseInt(room[0]) === 1){
+      RenderedComponent = <JsonRead src="finalFilter.json" csvSrc="p1.csv" backgroundImage="firstFloor2.png" endId={room}/>;
     }
-  };
+    else if(parseInt(room[0]) === 2){
+      RenderedComponent = <ul><li><JsonRead src="finalFilter.json" csvSrc="p1.csv" backgroundImage="firstFloor2.png" endId={27}/></li><li><JsonRead src="finalFilter.json" csvSrc="p2.csv" backgroundImage="secondFloor2.png" endId={room}/></li></ul>; 
+    }
+    else if(parseInt(room[0]) === 3){
+      RenderedComponent = <ul><li><JsonRead src="finalFilter.json" csvSrc="p1.csv" backgroundImage="firstFloor2.png" endId={27}/></li><li><JsonRead src="finalFilter.json" csvSrc="p3.csv" backgroundImage="thirdFloor2.png" endId={room}/></li></ul>; 
+    }
+    else{
+      RenderedComponent = <div>Sorry We Don't Have This Yet</div>;
+    }
+  }
 
   const handleSelectChange = (e) => {
     const selectedRoom = e.target.value;
     setRoom(selectedRoom);
+    setRoute(null);
     console.log('Selected Room:', selectedRoom);
   };
 
@@ -43,72 +58,20 @@ function App() {
             <Select idStr="rooms-end" value={room} onChange={handleSelectChange} />
           </li>
           <li>
-            <button onClick={handleSearch}>Route</button>
+            <button onClick={() => setRoute(room)}>Route</button>
           </li>
-          <li>
-            <button onClick={() => setFloor(0)}>Basement</button>
-          </li>
-          <li>
-            <button onClick={() => setFloor(1)}>1<sup>st</sup> floor</button>
-          </li>
-          <li>
-            <button onClick={() => setFloor(2)}>2<sup>nd</sup> floor</button>
-          </li>
-          <li>
-            <button onClick={() => setFloor(3)}>3<sup>rd</sup> floor</button>
-          </li>
-          <JsonRead src="finalFilter.json" csvSrc="p1.csv" backgroundImage="firstFloor.png" endId={room}/>
-
-          {floor !== -1 && (
-            <div className="scroll">
-              <li>
-                <IconButton
-                  aria-label="up"
-                  size="medium"
-                  onClick={() => setFloor(floor === 3 ? 0 : floor + 1)}
-                >
-                  <KeyboardArrowUpIcon />
-                  {floor === 3 ? "Loop around to basement" : "To higher floor"}
-                </IconButton>
-              </li>
-              <li>
-                <IconButton
-                  aria-label="down"
-                  size="medium"
-                  onClick={() => setFloor(floor === 0 ? 3 : floor - 1)}
-                >
-                  <KeyboardArrowDownIcon />
-                  {floor === 0 ? "Loop around to floor 3" : "To lower floor"}
-                </IconButton>
-              </li>
-            </div>
-          )}
+          {RenderedComponent}
         </ul>
-
-        <figure>
-          {floor !== -1 &&
-            [<MapComponentb />, <MapComponentf1 />, <MapComponentf2 />, <MapComponentf3 />][floor]}
-        </figure>
 
         <div id="aside">
           <p style={{ fontStyle: "oblique" }}>Pathfinders, 2025.</p>
-          <p style={{ fontWeight: 700 }}>Contributors:</p>
+          <h4>Contributors</h4>
           <hr />
-          <p>Shawn Plackiyil.</p>
-          <p>Daniel Kozlowski.</p>
-          <p>Yutian Wang.</p>
-          <p>Fionn McCabeWild.</p>
+          <p>Shawn Plackiyil '25.</p>
+          <p>Daniel Kozlowski '26.</p>
+          <p>Yutian Wang '26.</p>
+          <p>Fionn McCabe-Wild '26.</p>
           <hr />
-        </div>
-
-        <div
-          id="floor"
-          style={{
-            backgroundColor: "#" + "cd3fa8a8c8cd".slice(3 * floor, 3 * floor + 3),
-          }}
-        >
-          Display
-          {[": awaiting..", "ing basement", "ing floor 1", "ing floor 2", "ing floor 3"][floor + 1]}.
         </div>
       </div>
     </>
